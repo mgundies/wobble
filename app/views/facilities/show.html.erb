@@ -1,0 +1,17 @@
+<%  f= @facility %>
+</br></br>
+<table class="factable">
+  <tr>
+    <th>Facility Name</th>
+    <th>Company</th>
+    <th>Week Starting</th>
+  </tr>
+  <tr>
+    <td><%= f.facilityname %></td>
+    <td><%= f.companyname %></td>
+    <td><%= f.reportdate.strftime("%d-%b-%Y") %></td>
+  </tr>
+</table>
+</br>
+
+<%= render :partial => 'form2' %>

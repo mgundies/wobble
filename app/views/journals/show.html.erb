@@ -1,0 +1,20 @@
+<h1>A Journal</h1>
+<%  j= @journal %>
+
+<table class="factable">
+  <tr>
+    <th>Facility Name</th>
+    <th>Week day</th>
+    <th>Start time</th>
+    <th>Finish time</th>
+    <th>Worker assigned</th>
+  </tr>
+  <tr>
+    <td><%= j.facility.facilityname %></li>
+    <td><%= j.day %></li>
+    <td><%= j.speriod.strftime("%I:%M %p")%></li>
+    <td><%= j.eperiod.strftime("%I:%M %p")%></li>
+    <td><%= j.user.fullname %></li>
+    <br>
+  </tr>
+</table>

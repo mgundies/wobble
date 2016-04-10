@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<script type="text/javascript">
+  // $(document).ready(function(){
+  //   $('.dateroster').datepicker({format: 'yyyy/mm/dd'}).on('changeDate', function (e) {
+  //     e["dates"]
+  //   });
+  // })
+
+  // var dosomething = function() {
+  //   localStorage.setItem("roster_start_date", document.getElementById('dateval').value);
+  //   console.log(localStorage.getItem("roster_start_date"));
+  // };
+</script>
+
+<head>
+  <title>Wobble</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <nav>
+    <%= link_to 'Home', root_path %>
+    <% if @current_user.present? %>
+      <% if @current_user.admin? %>
+        <%= link_to "All users", users_path %>
+      <% end %>
+      <%= link_to "Edit profile", edit_user_url(@current_user) %>
+      <%= link_to "Logout      #{ @current_user.email}", login_path, :method => :delete %>
+    <% else %>
+      <%= link_to "Sign up", signup_path %>
+
+      <%= link_to "Log in", login_path %>
+    <% end %>
+
+  </nav>
+
+
+
+  <% if flash[:error].present? %>
+    <h2 class="error">
+      <%= flash[:error] %>
+    </h2>
+  <% end %>
+
+<%= yield %>
+
+</body>
+</html>

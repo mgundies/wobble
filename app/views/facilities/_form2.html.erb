@@ -1,0 +1,57 @@
+
+<%  f= @facility %>
+
+<% if (params[:rosterdate] == nil || !params.key?(:rosterdate)) then %>
+  <h2>You must set a roster date in the Facilities page</h2>
+<% else %>
+
+<h2>Current Roster</h2>
+  <table class="factable">
+    <tr>
+      <th>DATE</th>
+      <th>WORKER</th>
+      <th>START TIME</th>
+      <th>FINISH TIME</th>
+    </tr>
+
+    <% f.journals.order(:day).each do |j| %>
+      <% if ((j.day >= Date.parse(params[:rosterdate])) && (j.day < (Date.parse(params[:rosterdate]) + 8.days)))  %>
+        <% if (session[:user_id] == j.user_id) || (User.find_by(id: session[:user_id]).admin) %>
+          <tr>
+            <td><%= j.day.strftime("%d-%b-%Y") %></td>
+            <td><%= User.find_by(id: j.user_id).fullname %></td>
+            <td><%= j.speriod.strftime("%I:%M %p") %></td>
+            <td><%= j.eperiod.strftime("%I:%M %p") %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    <% end %>
+  </table>
+  <% if (User.find_by(id: session[:user_id]).admin) %>
+    <h2>Unallocated Shifts</h2>
+    <table class="factable">
+      <tr>
+        <th>DATE</th>
+        <th>FACILITY</th>
+        <th>START TIME</th>
+        <th>FINISH TIME</th>
+        <th>REASON</th>
+      </tr>
+      <% f.shifts.order(:weekday).each do |s| %>
+        <% shiftdate = (Date.parse(params[:rosterdate]) + s.weekday.days - 1.days) %>
+        <% numalloc = Journal.where("day = :sd AND speriod = :sp AND eperiod = :ep",
+                                      {sd: shiftdate, sp: s.stime, ep: s.ftime}).count %>
+
+        <% if numalloc != s.numworkers %>
+          <tr>
+            <td><%= shiftdate.strftime("%d-%b-%Y") %></td>
+            <td><%= s.facility.facilityname        %></td>
+            <td><%= s.stime.strftime("%I:%M %p")   %></td>
+            <td><%= s.ftime.strftime("%I:%M %p")   %></td>
+            <td><%= s.numworkers.to_s + " required. " + numalloc.to_s + " allocated." %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </table>
+  <% end %>
+<% end %>

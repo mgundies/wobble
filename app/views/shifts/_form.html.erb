@@ -1,0 +1,33 @@
+<%= form_for @shift do |s| %>
+  <fieldset>
+    <%= s.label :facilityname %>
+    <%= s.select( :facility_id, Facility.pluck( :facilityname, :id ), :include_blank => false )  %>
+  </fieldset>
+
+  <fieldset>
+    <%= s.label :numworkers %>
+    <%= s.select( :numworkers, (1..100)) %>
+  </fieldset>
+
+  <fieldset>
+    <%= s.label :stime, 'Start Shift' %>
+    <%= s.time_select( :stime,  {minute_step: 30}) %>
+  </fieldset>
+
+  <fieldset>
+    <%= s.label :etime, 'End Shift' %>
+    <%= s.time_select( :ftime,  {minute_step: 30}) %>
+  </fieldset>
+
+  <fieldset>
+    <%= s.label :weekday %>
+    <%= s.select( :weekday,  [['mon',1], ['tue',2], ['wed',3],
+                              ['thur',4], ['fri',5], ['sat',2], ['sun',0]])  %>
+
+  </fieldset>
+
+  <fieldset>
+    <%= s.submit %>
+  </fieldset>
+
+<% end %>

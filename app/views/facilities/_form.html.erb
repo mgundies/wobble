@@ -1,0 +1,20 @@
+<%= form_for @facility do |f| %>
+  <fieldset>
+    <%= f.label :facilityname %>
+    <%= f.text_field :facilityname  %>
+  </fieldset>
+
+  <fieldset>
+    <%= f.label :companyname %>
+    <%= f.text_field :companyname %>
+  </fieldset>
+
+  <fieldset>
+    <%= f.label :reportdate %>
+    <%= f.date_field :reportdate %>
+  </fieldset>
+
+  <fieldset>
+    <%= f.submit %>
+  </fieldset>
+<% end %>

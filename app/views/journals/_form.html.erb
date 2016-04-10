@@ -1,0 +1,51 @@
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    $('.datefield').datepicker({format: 'yyyy/mm/dd'}).on('changeDate', function (e) {
+      e["dates"]
+    });
+
+    var timepicker2 = $('input.timepicker2').timepicker({
+        timeFormat: 'hh:mm',
+        // year, month, day and seconds are not important
+        minTime: new Date(0, 0, 0, 8, 0, 0),
+        maxTime: new Date(0, 0, 0, 18, 0, 0),
+        // items in the dropdown are separated by at interval minutes
+        interval: 10,
+    });
+
+  });
+</script>
+
+
+<%= form_for @journal do |f| %>
+  <fieldset>
+    <%= f.label :facilityname %>
+    <%= f.select( :facility_id, Facility.pluck( :facilityname, :id ), :include_blank => false )  %>
+  </fieldset>
+
+  <fieldset>
+    <%= f.label :day %>
+    <%= f.text_field :day, :class => 'datefield'%>
+  </fieldset>
+
+  <fieldset>
+    <%= f.label :speriod, 'Start period' %>
+    <%= f.time_select( :speriod,  {minute_step: 30}) %>
+  </fieldset>
+
+  <fieldset>
+    <%= f.label :eperiod, 'End Shift' %>
+    <%= f.time_select( :eperiod,  {minute_step: 30}) %>
+  </fieldset>
+
+  <fieldset>
+    <%= f.label :user_id %>
+    <%= f.select( :user_id, User.pluck(:fullname, :id), :include_blank => false)  %>
+  </fieldset>
+
+  <fieldset>
+    <%= f.submit %>
+  </fieldset>
+
+<% end %>

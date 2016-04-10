@@ -1,0 +1,26 @@
+<h1>Edit User</h1>
+
+<%= form_for @user do |f| %>
+  <%= f.label :email %>
+  <%= f.email_field :email %>
+</br>
+  <%= f.label :fullname %>
+  <%= f.text_field :fullname %>
+</br>
+  <%= f.label :companyname %>
+  <%= f.text_field :companyname %>
+</br>
+  <%= f.label :minhours %>
+  <%= f.number_field :minhours %>
+</br>
+  <%= f.label :maxhours %>
+  <%= f.number_field :maxhours %>
+<!--
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+
+  <%= f.label :password_confirmation %>
+  <%= f.password_field :password_confirmation %>
+-->
+  <%= f.submit "Update" %>
+<% end %>

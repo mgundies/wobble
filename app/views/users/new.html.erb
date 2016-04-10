@@ -1,0 +1,37 @@
+<h1>Sign up Fools!</h1>
+
+<% if @user.errors.any?  %>
+  <ol>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ol>
+<% end %>
+
+<%= form_for @user do |f| %>
+  <%= f.label :email %>
+  <%= f.email_field :email, :required => true %>
+
+  <%= f.label :password %>
+  <%= f.password_field :password, :required => true %>
+
+  <%= f.label :password_confirmation %>
+  <%= f.password_field :password_confirmation, :required => true %>
+
+  <%= f.label :fullname %>
+  <%= f.text_field :fullname %>
+
+  <%= f.label :companyname %>
+  <%= f.text_field :companyname %>
+
+  <%= f.label :minhours %>
+  <%= f.number_field :minhours %>
+
+  <%= f.label :maxhours %>
+  <%= f.number_field :maxhours %>
+
+  <%= f.label :admin %>
+  <%= f.check_box :admin %>
+
+  <%= f.submit "Sign Up" %>
+<% end %>

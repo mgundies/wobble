@@ -1,0 +1,21 @@
+<h1>All Shifts</h1>
+
+<table class="factable">
+  <tr>
+    <th>Facility Name</th>
+    <th>Workers req</th>
+    <th>Start time</th>
+    <th>Finish time</th>
+    <th>Day of Weed</th>
+  </tr>
+  <% @shifts.each do |s| %>
+    <tr>
+      <td><%= s.facility.facilityname %></li>
+      <td><%= s.numworkers %></li>
+      <td><%= s.stime.strftime("%I:%M %p")%></li>
+      <td><%= s.ftime.strftime("%I:%M %p")%></li>
+      <td><%= get_day(s.weekday) %></li>
+      <br>
+    </tr>
+  <% end %>
+</table>

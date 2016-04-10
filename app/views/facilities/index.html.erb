@@ -1,0 +1,21 @@
+<h1>all facilities</h1>
+
+<p id="fac_notice"><%= flash[:notice] %></p>
+<% flash[:notice] = "" %>
+<%= form_tag facilities_setdate_path, method: :post do %>
+  <%= date_field :reportdate, :reportdate %>
+  <%= submit_tag 'setdate' %>
+<% end %>
+
+<% @facilities.each do |f| %>
+<li>
+  <%= f.facilityname %>
+  <%= "("+f.companyname+")" %>
+  <%= link_to(" [VIEW ROSTER]", { controller: "facilities", action: "show", id: f.id , rosterdate: f.reportdate}) %>
+  <%= link_to(" [UPDATE DETAILS]", { controller: "facilities", action: "edit", id: f.id }) %>
+</li>
+
+  <br>
+</tr>
+
+<% end %>

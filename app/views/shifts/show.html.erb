@@ -1,0 +1,20 @@
+<h1>Shift view</h1>
+<% s = @shift %>
+
+<table class="factable">
+  <tr>
+    <th>Facility Name</th>
+    <th>Workers req</th>
+    <th>Start time</th>
+    <th>Finish time</th>
+    <th>Date</th>
+  </tr>
+  <tr>
+    <td><%= s.facility.facilityname %></li>
+    <td><%= s.numworkers %></li>
+    <td><%= s.stime.strftime("%I:%M %p") %></li>
+    <td><%= s.ftime.strftime("%I:%M %p")%></li>
+    <td><%= get_day(s.weekday) %></li>
+    <br>
+  </tr>
+</table>

@@ -1,0 +1,25 @@
+// Place all the styles related to the Shifts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+#shifttable {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#shifttable td, #shifttable th {
+    border: 1px solid #ddd;
+    text-align: left;
+    padding: 8px;
+}
+
+#shifttable tr:nth-child(even){background-color: #f2f2f2}
+
+#shifttable tr:hover {background-color: #ddd;}
+
+#shifttable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: #4CAF50;
+    color: white;
+}
