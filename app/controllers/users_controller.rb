@@ -5,6 +5,10 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  def show
+      @user = User.find params[:id]
+  end
+
   def create
     # require 'pry'
     # binding.pry
@@ -28,8 +32,7 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
-  def show
-  end
+
 
   def index
     authorise

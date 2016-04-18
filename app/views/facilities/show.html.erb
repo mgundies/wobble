@@ -1,3 +1,20 @@
+<h1>Facility Information</h1>
+<div class="NavCol">
+<h4>Set the Roster Date</h4>
+<%= form_tag facilities_setdate_path, method: :post do %>
+  <%= date_field :reportdate, :reportdate %>
+  <%= submit_tag 'setdate' %>
+<% end %>
+
+
+  </br>
+  <%= link_to("View Facilities", { controller: "facilities", action: "index"}) %>
+  </br>
+  <%= link_to("View Journals", { controller: "journals", action: "index"}) %>
+  </br>
+  <%= link_to("View Shifts", { controller: "shifts", action: "index"}) %>
+</div>
+<div class="ContentCol">
 <%  f= @facility %>
 </br></br>
 <table class="factable">
@@ -12,6 +29,6 @@
     <td><%= f.reportdate.strftime("%d-%b-%Y") %></td>
   </tr>
 </table>
+  <%= render :partial => 'form2' %>
 </br>
-
-<%= render :partial => 'form2' %>
+</div>

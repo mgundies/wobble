@@ -21,21 +21,35 @@
 </head>
 <body>
 
-  <nav>
-    <%= link_to 'Home', root_path %>
+  <div id="cssmenu">
+    <ul>
+    <li class="active">
+      <%= link_to 'Home', root_path %>
+    </li>
+
     <% if @current_user.present? %>
+    <li>
       <% if @current_user.admin? %>
         <%= link_to "All users", users_path %>
       <% end %>
+    </li>
+    <li>
       <%= link_to "Edit profile", edit_user_url(@current_user) %>
-      <%= link_to "Logout      #{ @current_user.email}", login_path, :method => :delete %>
+    </li>
+    <li>
+      <%= link_to "Logout:      #{ @current_user.email}", login_path, :method => :delete %>
+    </li>
     <% else %>
+    <li>
       <%= link_to "Sign up", signup_path %>
-
+    </li>
+    <li>
       <%= link_to "Log in", login_path %>
+    </li>
     <% end %>
+  </ul>
 
-  </nav>
+  </div>
 
 
 

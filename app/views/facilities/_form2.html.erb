@@ -27,6 +27,9 @@
       <% end %>
     <% end %>
   </table>
+
+
+
   <% if (User.find_by(id: session[:user_id]).admin) %>
     <h2>Unallocated Shifts</h2>
     <table class="factable">

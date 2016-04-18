@@ -1,4 +1,22 @@
 <h1>A Journal</h1>
+
+<div class="NavCol">
+<h4>Set the Roster Date</h4>
+<%= form_tag facilities_setdate_path, method: :post do %>
+  <%= date_field :reportdate, :reportdate %>
+  <%= submit_tag 'setdate' %>
+<% end %>
+
+
+  </br>
+  <%= link_to("View Facilities", { controller: "facilities", action: "index"}) %>
+  </br>
+  <%= link_to("View Journals", { controller: "journals", action: "index"}) %>
+  </br>
+  <%= link_to("View Shifts", { controller: "shifts", action: "index"}) %>
+</div>
+
+<div class="ContentCol">
 <%  j= @journal %>
 
 <table class="factable">
@@ -18,3 +36,4 @@
     <br>
   </tr>
 </table>
+</div>

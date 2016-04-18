@@ -1,0 +1,69 @@
+<h1>Indiviual User Data</h1>
+
+</br>
+<% if @current_user.present?  %>
+<% end %>
+</br>
+
+<% u = @user %>
+
+<table class="factable">
+  <tr>
+    <td>Name</td>
+    <td>email</td>
+    <td>Admin ?</td>
+    <td>Company</td>
+    <td>Max Hours</td>
+  </tr>
+  <tr>
+    <td><%= u.fullname %></li>
+    <td><%= u.email %></li>
+    <td><%= u.admin%></li>
+    <td><%= u.companyname%></li>
+    <td><%= u.maxhours %></li>
+    <br>
+  </tr>
+</table>
+
+
+<h2>Current Roster all for User: <%= u.fullname %></h2>
+<table class="factable">
+  <tr>
+    <th>DATE</th>
+    <th>WORKER</th>
+    <th>FACILITY</th>
+    <th>START TIME</th>
+    <th>FINISH TIME</th>
+  </tr>
+
+  <% Journal.all.order(:day).each do |j| %>
+    <% if u.id == j.user_id %>
+      <tr>
+        <td><%= j.day.strftime("%d-%b-%Y") %></td>
+        <td><%= u.fullname %></td>
+        <td><%= Facility.find_by(id: j.facility_id).facilityname %></td>
+        <td><%= j.speriod.strftime("%I:%M %p") %></td>
+        <td><%= j.eperiod.strftime("%I:%M %p") %></td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>
+
+<h2>Hours currently allocated to User</h2>
+<table class="factable">
+  <tr>
+    <th>WORKER</th>
+    <th>HOURS</th>
+  </tr>
+  <% schdDate = Facility.first.reportdate  %>
+  <% if !schdDate.wday==0 %>
+  <%   schdDateStart = get_prev_daynum(schdDate, 0) %>
+  <% else %>
+  <%   schdDateStart = schdDate %>
+  <% end %>
+  <tr>
+    <td><%= u.fullname %></td>
+    <td><%= User.workerHoursSchd(schdDateStart, u.id)/3600 %></td>
+  </tr>
+
+</table>

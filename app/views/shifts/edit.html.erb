@@ -1,2 +1,21 @@
-<h1>Edit a shift</h1>
-<%= render :partial => 'form' %>
+
+<h1>Edit Shift</h1>
+<div class="NavCol">
+  <h4>Set the Roster Date</h4>
+  <%= form_tag facilities_setdate_path, method: :post do %>
+    <%= date_field :reportdate, :reportdate %>
+    <%= submit_tag 'setdate' %>
+  <% end %>
+
+
+  </br>
+  <%= link_to("View Facilities", { controller: "facilities", action: "index"}) %>
+  </br>
+  <%= link_to("View Journals", { controller: "journals", action: "index"}) %>
+  </br>
+  <%= link_to("View Shifts", { controller: "shifts", action: "index"}) %>
+</div>
+<div class="ContentCol">
+  <h1>Edit a shift</h1>
+  <%= render :partial => 'form' %>
+</div>

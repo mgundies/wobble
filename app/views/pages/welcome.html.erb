@@ -1,33 +1,20 @@
-<h1>Roster thing</h1>
 
+
+<h1>ROSTER THINGS</h1>
+
+<div class="NavCol">
+<h4>Set the Roster Date</h4>
 <%= form_tag facilities_setdate_path, method: :post do %>
   <%= date_field :reportdate, :reportdate %>
   <%= submit_tag 'setdate' %>
 <% end %>
 
-
-
-<!-- <%= form_tag("/facilities", method: "get") do %>
-  <%= label_tag(:id, "Enter first day of Roster Period") %></br>
-  <%= text_field_tag(:id) %>
-  <%= submit_tag("Search") %>
-<% end %> -->
-</br>
-<%= link_to("View Facilities", { controller: "facilities", action: "index"}) %>
-</br>
-<%= link_to("View Journals", { controller: "journals", action: "index"}) %>
-</br>
-<%= link_to("View Shifts", { controller: "shifts", action: "index"}) %>
-
-<div class='scheduleControls'>
-<%= form_tag root_path, :id => 'scheduleControl' do %>
-  <%= select_tag :id, options_for_select(Facility.pluck( :facilityname, :id))  %>
-  <%= submit_tag 'Search '  %>
-<% end %>
-
-</br>
-<%= link_to("New Facility", { controller: "facilities", action: "new"}) %>
-</br>
-<%= link_to("New Journal", { controller: "journals", action: "new"}) %>
-</br>
-<%= link_to("New Shifts", { controller: "shifts", action: "new"}) %>
+  </br>
+  <%= link_to("View Facilities", { controller: "facilities", action: "index"}) %>
+  </br>
+  <%= link_to("View Journals", { controller: "journals", action: "index"}) %>
+  </br>
+  <%= link_to("View Shifts", { controller: "shifts", action: "index"}) %>
+</div>
+<div class="ContentCol">
+</div>

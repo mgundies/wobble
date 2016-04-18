@@ -1,21 +1,49 @@
 <h1>all facilities</h1>
 
-<p id="fac_notice"><%= flash[:notice] %></p>
-<% flash[:notice] = "" %>
-<%= form_tag facilities_setdate_path, method: :post do %>
-  <%= date_field :reportdate, :reportdate %>
-  <%= submit_tag 'setdate' %>
+<div class="NavCol">
+    <h4>Set the Roster Date</h4>
+    <p id="fac_notice"><%= flash[:notice] %></p>
+    <% flash[:notice] = "" %>
+    <%= form_tag facilities_setdate_path, method: :post do %>
+      <%= date_field :reportdate, :reportdate %>
+      <%= submit_tag 'setdate' %>
+    <% end %>
+
+  </br>
+  <%= link_to("View Facilities", { controller: "facilities", action: "index"}) %>
+  </br>
+  <%= link_to("View Journals", { controller: "journals", action: "index"}) %>
+  </br>
+  <%= link_to("View Shifts", { controller: "shifts", action: "index"}) %>
+</br>
+</br>
+</br>
+<%= link_to("New Facility", { controller: "facilities", action: "new"}) %>
+</br>
+</br>
+<h4>Automatically Assign workers to a facility</h4>
+<div class='scheduleControls'>
+<%= form_tag root_path, :id => 'scheduleControl' do %>
+  <%= select_tag :id, options_for_select(Facility.pluck( :facilityname, :id))  %>
+  <%= submit_tag 'ASSIGN'  %>
 <% end %>
+</div>
 
-<% @facilities.each do |f| %>
-<li>
-  <%= f.facilityname %>
-  <%= "("+f.companyname+")" %>
-  <%= link_to(" [VIEW ROSTER]", { controller: "facilities", action: "show", id: f.id , rosterdate: f.reportdate}) %>
-  <%= link_to(" [UPDATE DETAILS]", { controller: "facilities", action: "edit", id: f.id }) %>
-</li>
-
-  <br>
-</tr>
-
-<% end %>
+</div>
+<div class="ContentCol">
+  <table class="factable">
+    <tr>
+      <th>FACILITY NAME</th>
+      <th>COMPANY</th>
+      <th>LINK TO ROSTER</th>
+      <th>LINK TO DETAILS</th>
+    </tr>
+  <% @facilities.each do |f| %>
+    <tr>
+      <td><%= f.facilityname %></td>
+      <td><%= "("+f.companyname+")" %></td>
+      <td><%= link_to(" [VIEW ROSTER]", { controller: "facilities", action: "show", id: f.id , rosterdate: f.reportdate}) %></td>
+      <td><%= link_to(" [UPDATE DETAILS]", { controller: "facilities", action: "edit", id: f.id }) %></td>
+    </tr>
+  <% end %>
+</div>

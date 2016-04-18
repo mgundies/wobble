@@ -1,5 +1,5 @@
 class ShiftsController < ApplicationController
-  before_action :authorise, :only => [:index]
+  before_action :authorise, :except => [:show, :index]
 
   def new
     @shift = Shift.new

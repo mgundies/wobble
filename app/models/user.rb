@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   has_many :journals
 
 
-  # need to check worker hours scheduled in current period
+  # Calculates how many hours the worker (userid) currently has assigned
   def self.workerHoursSchd(dateWeekStart, userid)
     jSchd = Journal.where("user_id = :uid AND day >= :sd AND day < :ed",
                 {uid: userid, sd: dateWeekStart, ed: dateWeekStart + 8.days})
@@ -32,14 +32,27 @@ class User < ActiveRecord::Base
     return sumHours
   end #def self.workerLimit
 
-
+  #Calculate how much unallocated time a worker has left
+  # i.e. sum up hours current assigned and subtract from max hours
   def self.workerTimeFree(dateWeekStart, userid)
     hrSchd = workerHoursSchd(dateWeekStart, userid)
     maxH = User.where("id="+userid.to_s).pluck(:maxhours).flatten
     maxH = maxH[0].to_i
     maxH = maxH*60*60     #All time quantities are in seconds
-    return (maxH - hrSchd)
+    return (maxH - hrSchd )
   end #def self.workerOverMax
+
+  # method to check if user/worker already has a shift on a given date 
+  def self.hasShiftToday(dateToCheck, userid)
+    jSchd = Journal.where("user_id = :uid AND day= :sd",
+                {uid: userid, sd: dateToCheck}).count
+    if jSchd > 0
+      return true
+    else
+      return false
+    end
+  end
+
 
 
 end # class

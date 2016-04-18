@@ -1,5 +1,27 @@
 <h1>All Shifts</h1>
 
+
+<div class="NavCol">
+<h4>Set the Roster Date</h4>
+<%= form_tag facilities_setdate_path, method: :post do %>
+  <%= date_field :reportdate, :reportdate %>
+  <%= submit_tag 'setdate' %>
+<% end %>
+
+  </br>
+  <%= link_to("View Facilities", { controller: "facilities", action: "index"}) %>
+  </br>
+  <%= link_to("View Journals", { controller: "journals", action: "index"}) %>
+  </br>
+  <%= link_to("View Shifts", { controller: "shifts", action: "index"}) %>
+  </br>
+  </br>
+  </br>
+
+  <%= link_to("New Shifts", { controller: "shifts", action: "new"}) %>
+
+</div>
+<div class="ContentCol">
 <table class="factable">
   <tr>
     <th>Facility Name</th>
@@ -19,3 +41,4 @@
     </tr>
   <% end %>
 </table>
+</div>
